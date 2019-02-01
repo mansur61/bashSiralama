@@ -1,0 +1,63 @@
+#!/bin/bash
+declare -a dz
+k=0;
+for i in $*
+do
+ dz[k]=$i;
+ #echo ${dz[k]} ;# ekrana dizi bu şekil bastırılır
+ k=$((k+1))
+done
+
+#echo "- "${dz[0]}
+#echo "- "${dz[1]}
+#echo "- "${dz[2]}
+
+#echo ${#dz[*]} # dizi uzunluğu bu şekilde alınır..
+tut=0;
+uzunluk=${#dz[*]} #bu veya $# bu girilen tüm argümanların toplam sayısını verir
+#echo "uzunluk", $uzunluk,"tut :" $tut;
+
+for (( i=0; i<uzunluk; i++ ))
+do
+        #echo "i :"  ${dz[i]};
+
+        for(( m=i+1; m<uzunluk; m++ ))
+        do 
+	#	echo "m :" $m;
+		if [ ${dz[i]} -lt ${dz[m]} ]
+		then
+		tut=${dz[i]}
+		  #echo "tut :"$tut
+		dz[i]=${dz[m]}
+		  #echo "dz[i]:"${dz[i]}	
+		dz[m]=$tut
+		 # echo "dz[m]:"${dz[m]} 
+		fi
+	done
+	#echo    echo ${dz[i]} 	
+done
+
+
+#---------------------------------------------
+
+buyukten_kucuge_sirala(){
+echo "Büyükten küçüğe sırala"
+for(( i=0; i<uzunluk; i++ ))
+do
+	echo ${dz[i]};
+done
+}
+buyukten_kucuge_sirala
+#---------------------------------------------
+kucukten_buyuge_sirala(){
+echo "Küçükten büyüğe sırala"
+for(( i=uzunluk; i>=0; i--))
+do
+        echo ${dz[i]};
+done
+}
+kucukten_buyuge_sirala
+
+
+
+
